@@ -48,8 +48,8 @@ RUN echo "## Checking docker user ID {"; \
     
 # Download&Install NFS Ganesha {
 
-ENV NFS_GANESHA_VERSION "${NFS_GANESHA_VERSION:2.7}"
-ENV NFS_GANESHA_BUILD "${NFS_GANESHA_BUILD:1}"
+ENV NFS_GANESHA_VERSION "${NFS_GANESHA_VERSION:'2.7'}"
+ENV NFS_GANESHA_BUILD "${NFS_GANESHA_BUILD:'1'}"
 WORKDIR /usr/src
 RUN echo "## Downloading&Installing NFS Ganesha v${NFS_GANESHA_VERSION}.${NFS_GANESHA_BUILD} {"; \
     set -x; \
@@ -80,7 +80,7 @@ RUN echo "## /etc/exports: {"; \
 COPY "${SRC_PATH_PREFIX}docker-entrypoint.sh" "/usr/local/bin/"
 
 ENV NFS_DIR "${NFS_DIR:/home/docker/nfs-shared}"
-ENV NFS_PORT ${NFS_PORT:2049}
+ENV NFS_PORT ${NFS_PORT:'2049'}
 ENV NFS_ALLOWED_HOSTS "${NFS_ALLOWED_HOSTS:*"
 
 RUN echo "## Checking&Configuring NFSD {"; \
