@@ -24,11 +24,11 @@ RUN echo "## Installing prerequisites {"; \
     apk add --no-cache \
     wget tar bzip2 xz perl openssl libressl gnupg tree \
     ca-certificates coreutils dpkg tzdata \
-    libedit libxml2 pcre; \
+    libedit libxml2 pcre bison; \
     buildDeps=' \
         g++ gcc build-base cmake make binutils-gold \
         libgcc linux-headers \
-        krb5-dev \
+        krb5-dev flex-dev \
     '; \
     export buildDeps; \
     echo ${buildDeps}; \
