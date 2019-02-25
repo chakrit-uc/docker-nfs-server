@@ -60,7 +60,7 @@ RUN echo "## Downloading&Installing NFS Ganesha v${NFS_GANESHA_VERSION}.${NFS_GA
     #./configure; \
     mkdir -p build; \
     cd build/; \
-    cmake -DUSE_FSAL_ZFS=OFF -DUSE_FSAL_CEPHFS=OFF ${EXTRA_CMAKE_ARGS} ..; \
+    cmake -DUSE_FSAL_ZFS=OFF -DUSE_FSAL_CEPHFS=OFF ${EXTRA_CMAKE_ARGS} ../src; \
     lsb_release -a; \
     ./make; \
     ./make install; \
