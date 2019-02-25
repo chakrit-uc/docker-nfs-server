@@ -28,6 +28,7 @@ RUN echo "## Installing prerequisites {"; \
     buildDeps=' \
         g++ gcc build-base cmake make binutils-gold \
         libgcc linux-headers \
+        krb5-dev \
     '; \
     export buildDeps; \
     echo ${buildDeps}; \
