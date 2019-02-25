@@ -45,7 +45,7 @@ RUN set -ex; \
 ENV NFS_GANESHA_VERSION "${NFS_GANESHA_VERSION:2.7}"
 ENV NFS_GANESHA_BUILD "${NFS_GANESHA_BUILD:1}"
 WORKDIR /usr/src
-RUN echo "## Downloading&Installing NFS Ganesha v${NFS_GANESHA_VERSION}.${NFS_GANESHA_BUILD} {"; 
+RUN echo "## Downloading&Installing NFS Ganesha v${NFS_GANESHA_VERSION}.${NFS_GANESHA_BUILD} {"; \
     set -x; \
     wget "https://download.nfs-ganesha.org/${NFS_GANESHA_VERSION}/${NFS_GANESHA_VERSION}.${NFS_GANESHA_BUILD}/nfs-ganesha-${NFS_GANESHA_VERSION}.${NFS_GANESHA_BUILD}.tar.gz"; \
     tar xzvf "nfs-ganesha-${NFS_GANESHA_VERSION}.${NFS_GANESHA_BUILD}.tar.gz"; \
