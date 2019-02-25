@@ -53,7 +53,7 @@ RUN echo "## Checking docker user ID {"; \
 
 WORKDIR /usr/src
 RUN echo "## Downloading&Installing NFS Ganesha v${NFS_GANESHA_VERSION}.${NFS_GANESHA_BUILD} {"; \
-    set -x; \
+    set -ex; \
     wget "https://download.nfs-ganesha.org/${NFS_GANESHA_VERSION}/${NFS_GANESHA_VERSION}.${NFS_GANESHA_BUILD}/nfs-ganesha-${NFS_GANESHA_VERSION}.${NFS_GANESHA_BUILD}.tar.gz"; \
     tar xzvf "nfs-ganesha-${NFS_GANESHA_VERSION}.${NFS_GANESHA_BUILD}.tar.gz"; \
     cd "nfs-ganesha-${NFS_GANESHA_VERSION}.${NFS_GANESHA_BUILD}/"; \
@@ -63,8 +63,8 @@ RUN echo "## Downloading&Installing NFS Ganesha v${NFS_GANESHA_VERSION}.${NFS_GA
     cd build/; \
     cmake -DUSE_FSAL_ZFS=OFF -DUSE_FSAL_CEPHFS=OFF ${EXTRA_CMAKE_ARGS} ../src; \
     lsb_release -a; \
-    ./make; \
-    ./make install; \
+    make; \
+    make install; \
     set +x; \
     echo "## }"
     
