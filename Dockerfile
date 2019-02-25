@@ -13,6 +13,8 @@ ARG DOCKER_UID=1000
 ARG DOCKER_GID=1000
 ARG SRC_PATH_PREFIX=""
 #"/alpine/"
+ARG NFS_GANESHA_VERSION="2.7"
+ARG NFS_GANESHA_BUILD="1"
 ARG EXTRA_CMAKE_ARGS=""
 
 # Install prerequisite tools {
@@ -48,8 +50,6 @@ RUN echo "## Checking docker user ID {"; \
     
 # Download&Install NFS Ganesha {
 
-ENV NFS_GANESHA_VERSION "${NFS_GANESHA_VERSION:'2.7'}"
-ENV NFS_GANESHA_BUILD "${NFS_GANESHA_BUILD:'1'}"
 WORKDIR /usr/src
 RUN echo "## Downloading&Installing NFS Ganesha v${NFS_GANESHA_VERSION}.${NFS_GANESHA_BUILD} {"; \
     set -x; \
@@ -61,6 +61,7 @@ RUN echo "## Downloading&Installing NFS Ganesha v${NFS_GANESHA_VERSION}.${NFS_GA
     mkdir -p build; \
     cd build/; \
     cmake -DUSE_FSAL_ZFS=OFF -DUSE_FSAL_CEPHFS=OFF ${EXTRA_CMAKE_ARGS} ..; \
+    lsb_release -a; \
     ./make; \
     ./make install; \
     set +x; \

@@ -1,5 +1,6 @@
 build
 ._*
 **/._*
+.DS_Store
 
 
