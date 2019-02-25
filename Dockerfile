@@ -25,7 +25,7 @@ RUN echo "## Installing prerequisites {"; \
     libedit libxml2 pcre; \
     buildDeps=' \
         g++ gcc build-base cmake make binutils-gold \
-        libgcc glibc linux-headers \
+        libgcc linux-headers \
     '; \
     export buildDeps; \
     echo ${buildDeps}; \
@@ -34,11 +34,17 @@ RUN echo "## Installing prerequisites {"; \
     echo "## }"
 # }
 
-RUN set -ex; \
-    id docker; \
+# Ensure docker user {
+
+RUN echo "## Checking docker user ID {"; \
+    set -x; \
     addgroup -g "${DOCKER_GID}" docker && \
     adduser -u "${DOCKER_UID}" -G docker -s /bin/sh -D docker; \
-    echo '%docker ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers
+    echo '%docker ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers; \
+    id docker; \
+    set +x; \
+    echo "## }"
+# }
     
 # Download&Install NFS Ganesha {
 
