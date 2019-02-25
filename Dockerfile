@@ -62,12 +62,13 @@ RUN echo "## Downloading&Installing NFS Ganesha v${NFS_GANESHA_VERSION}.${NFS_GA
     mkdir -p build; \
     cd build/; \
     cmake -DUSE_FSAL_ZFS=OFF -DUSE_FSAL_CEPHFS=OFF ${EXTRA_CMAKE_ARGS} ../src; \
-    lsb_release -a; \
+    #lsb_release -a; \
+    cat /etc/os-release; \
     make; \
     make install; \
-    set +x; \
+    set +ex; \
     echo "## }"
-    
+
 # }
 
 
@@ -75,7 +76,9 @@ RUN echo "## Downloading&Installing NFS Ganesha v${NFS_GANESHA_VERSION}.${NFS_GA
 
 #TEST {
 RUN echo "## /etc/exports: {"; \
-	cat /etc/exports; \
+    set -x; \
+    cat /etc/exports; \
+    set +x; \
     echo "## }"
 # }
 
