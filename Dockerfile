@@ -27,8 +27,8 @@ RUN echo "## Installing prerequisites {"; \
     libedit libxml2 pcre bison; \
     buildDeps=' \
         g++ gcc build-base cmake make binutils-gold \
-        libgcc linux-headers \
-        krb5-dev flex-dev \
+        libgcc linux-headers libexecinfo-dev \
+        krb5-dev flex-dev doxygen \
     '; \
     export buildDeps; \
     echo ${buildDeps}; \
@@ -61,7 +61,7 @@ RUN echo "## Downloading&Installing NFS Ganesha v${NFS_GANESHA_VERSION}.${NFS_GA
     #./configure; \
     mkdir -p build; \
     cd build/; \
-    cmake -DUSE_FSAL_ZFS=OFF -DUSE_FSAL_CEPHFS=OFF ${EXTRA_CMAKE_ARGS} ../src; \
+    cmake -DCMAKE_BUILD_TYPE=Release -DUSE_FSAL_ZFS=OFF -DUSE_FSAL_CEPHFS=OFF ${EXTRA_CMAKE_ARGS} ../src; \
     #lsb_release -a; \
     cat /etc/os-release; \
     make; \
