@@ -26,9 +26,9 @@ RUN echo "## Installing prerequisites {"; \
     ca-certificates coreutils dpkg tzdata \
     libedit libxml2 pcre bison; \
     buildDeps=' \
-        g++ gcc build-base cmake make binutils-gold \
+        g++ gcc build-base cmake make binutils-gold doxygen \
         libgcc linux-headers libexecinfo-dev \
-        krb5-dev flex-dev doxygen \
+        krb5-dev flex-dev portablexdr-dev \
     '; \
     export buildDeps; \
     echo ${buildDeps}; \
