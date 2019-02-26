@@ -24,11 +24,11 @@ RUN echo "## Installing prerequisites {"; \
     apk add --no-cache \
     wget tar bzip2 xz perl openssl libressl gnupg tree \
     ca-certificates coreutils dpkg tzdata \
-    libedit libxml2 pcre bison; \
+    libedit libxml2 pcre bison flex; \
     buildDeps=' \
-        g++ gcc build-base cmake make binutils-gold doxygen \
-        libgcc linux-headers libexecinfo-dev \
-        krb5-dev flex-dev portablexdr-dev \
+        git g++ gcc build-base cmake make binutils-gold doxygen \
+        libgcc linux-headers libexecinfo-dev libnfs-dev \
+        openssl-dev krb5-dev libgssglue-dev flex-dev portablexdr-dev libtirpc-dev \
     '; \
     export buildDeps; \
     echo ${buildDeps}; \
@@ -52,11 +52,14 @@ RUN echo "## Checking docker user ID {"; \
 # Download&Install NFS Ganesha {
 
 WORKDIR /usr/src
-RUN echo "## Downloading&Installing NFS Ganesha v${NFS_GANESHA_VERSION}.${NFS_GANESHA_BUILD} {"; \
+RUN echo "## Downloading&Installing NFS Ganesha v${NFS_GANESHA_VERSION} {"; \
     set -ex; \
-    wget "https://download.nfs-ganesha.org/${NFS_GANESHA_VERSION}/${NFS_GANESHA_VERSION}.${NFS_GANESHA_BUILD}/nfs-ganesha-${NFS_GANESHA_VERSION}.${NFS_GANESHA_BUILD}.tar.gz"; \
-    tar xzvf "nfs-ganesha-${NFS_GANESHA_VERSION}.${NFS_GANESHA_BUILD}.tar.gz"; \
-    cd "nfs-ganesha-${NFS_GANESHA_VERSION}.${NFS_GANESHA_BUILD}/"; \
+    git clone --recursive --single-branch --branch "V${NFS_GANESHA_VERSION}-stable" git://github.com/nfs-ganesha/nfs-ganesha.git "nfs-ganesha-${NFS_GANESHA_VERSION}"; \
+    #wget "https://download.nfs-ganesha.org/${NFS_GANESHA_VERSION}/${NFS_GANESHA_VERSION}.${NFS_GANESHA_BUILD}/nfs-ganesha-${NFS_GANESHA_VERSION}.${NFS_GANESHA_BUILD}.tar.gz"; \
+    #tar xzvf "nfs-ganesha-${NFS_GANESHA_VERSION}.${NFS_GANESHA_BUILD}.tar.gz"; \
+    cd "nfs-ganesha-${NFS_GANESHA_VERSION}/"; \
+    #git fetch && git checkout "V${NFS_GANESHA_VERSION}-stable" && git pull; \
+    git submodule update --init --recursive; \
     #chmod +x ./configure; \
     #./configure; \
     mkdir -p build; \
