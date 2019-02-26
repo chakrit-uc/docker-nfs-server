@@ -19,7 +19,7 @@ ARG EXTRA_CMAKE_ARGS=""
 
 # Install prerequisite tools {
 RUN echo "## Installing prerequisites {"; \
-    set -x; \
+    set -ex; \
     apk update; \
     apk add --no-cache \
     wget tar bzip2 xz perl openssl libressl gnupg tree \
@@ -28,12 +28,13 @@ RUN echo "## Installing prerequisites {"; \
     buildDeps=' \
         git g++ gcc build-base cmake make binutils-gold doxygen \
         libgcc linux-headers libexecinfo-dev libnfs-dev \
-        openssl-dev krb5-dev libgssglue-dev flex-dev portablexdr-dev libtirpc-dev \
+        openssl-dev krb5-dev libgssglue-dev flex-dev portablexdr-dev \
+        #libtirpc-dev \
     '; \
     export buildDeps; \
     echo ${buildDeps}; \
     apk add --no-cache --virtual .build-tools ${buildDeps}; \
-    set +x; \
+    set +ex; \
     echo "## }"
 # }
 
